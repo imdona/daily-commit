@@ -3,7 +3,7 @@
 고민의 흔적
 '''
 N = 6
-if N // 5 > 0 and N%:
+if N // 5 > 0:
     five = N // 5
     print(f"five:{five}")
     N -= 5* five

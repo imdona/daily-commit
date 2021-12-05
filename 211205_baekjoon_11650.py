@@ -14,9 +14,12 @@ for i in range(N):
     coordinate_list.append((x, y))
 
 coordinate_list.sort()
+# coordinate_list.sort(key = lambda x: (x[0], x[1])) : 같은 표현!
 
 for i in coordinate_list:
     print(i[0], i[1])
+
+
 
 
 ## 숏코딩! 한 줄에 완성 가능

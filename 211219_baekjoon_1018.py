@@ -33,24 +33,48 @@
 3. 8x8 크기로 잘라내는 경우의 수는 (N-7)x(M-7) -> N-7, M-7 범위 내에서 이중for문을 돌린다.
 '''
 N, M = map(int, input().split())
-chess_list = [input() for i in range(N)]
+chess_list = [input() for j in range(N)]
 # print(chess_list)
 
-for i in range(N-7):
-    for j in range(M-7):
+for j in range(N-7):
+    for k in range(M-7):
         w_start = 0
         b_start = 0
-        for k in range(i, i+8):
-            for l in range(j, j+8):
-                if (k+l) % 2 == 0:
-                    if chess_list[k][l] != 'W':
+        for k in range(j, j+8):
+            for board in range(k, k+8):
+                if (k+board) % 2 == 0:
+                    if chess_list[k][board] != 'W':
                         w_start += 1
-                    if chess_list[k][l] != 'B':
+                    if chess_list[k][board] != 'B':
                         b_start += 1
                 else:
-                    if chess_list[k][l] != 'B':
+                    if chess_list[k][board] != 'B':
                         w_start += 1
-                    if chess_list[k][l] != 'W':
+                    if chess_list[k][board] != 'W':
                         b_start += 1
 
 print(min(w_start, b_start))
+
+
+################################################################
+'''min을 구할 때, 그냥 비교하면 안되고, list를 만들어주어야 성공한다'''
+N, M = map(int, input().split())
+board = [input() for _ in range(N)]
+mini_board = []
+
+for i in range(N - 7):
+    for j in range(M - 7):
+        w_start = 0
+        b_start = 0
+        for l in range(i, i + 8):
+            for k in range(j, j + 8):
+                if (k + l)%2 == 0:
+                    if board[l][k] != 'W': w_start += 1
+                    if board[l][k] != 'B': b_start += 1
+                else :
+                    if board[l][k] != 'B': w_start += 1
+                    if board[l][k] != 'W': b_start += 1
+        mini_board.append(w_start)
+        mini_board.append(b_start)
+
+print(min(mini_board))

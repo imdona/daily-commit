@@ -143,7 +143,43 @@ else:
         print(count_list[1][0])
 
 ############################################################################################
+"""2022.1.1(sat) 새로운 풀이방법으로 풀어보기 도전!
+문제 풀면서 입력값이 정수 절대값 4000을 넘지 않는다. 즉 -4000 ~ 4000의 범위 밖에 되지않아서
+for문으로 풀어도 가능할 것 같아서 시도해보고싶었다.
+풀고 보니 count함수를 쓴것과 비슷했다. 그래도 직접해보니 속이 후련했다.
+오늘의 경험 블로깅까지 완료! ➡️ https://imdona.tistory.com/24
+"""
+# 최종 제출코드(3)
+import sys
+N = int(sys.stdin.readline())
+numbers = sorted([int(sys.stdin.readline()) for _ in range(N)])
 
+# 산술평균
+print(round(sum(numbers) / N))
 
+# 중앙값
+print(numbers[N // 2])
+
+# 최빈값
+# 숫자, count로 리스트 만들기
+count = []
+for i in range(-4000, 4001):
+    count.append([i, 0])
+# num을 돌면서 해당 숫자를 표현하는 인덱스번호에 1을 추가해준다
+for num in numbers:
+    count[num + 4000][1] += 1
+# 갯수 기준으로 정렬
+count.sort(key = lambda x: (-x[1], x[0]))
+# 출력
+if N == 1:
+    print(numbers[0])
+else:
+    if count[0][1] != count[1][1]:
+        print(count[0][0])
+    else:
+        print(count[1][0])
+
+# 범위 : 최댓값 - 최솟값
+print(max(numbers) - min(numbers))
 
 

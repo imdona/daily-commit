@@ -5,9 +5,9 @@
 하지만, 오른쪽을 기준으로 정렬한 별을 출력하시오.
 '''
 N = int(input()) # 반복 횟수 받기
-for i in range(N): 
+for i in range(N):
     i += 1 # range의 시작은 0부터 N-1까지라서
-    print(('*' * i).rjust(N)) # string type은 *로 반복 프린팅이 가능함 
+    print(('*' * i).rjust(N)) # string type은 *로 반복 프린팅이 가능함
 
 '''
 파이썬에서 오른쪽 정렬, 왼쪽 정렬

@@ -14,7 +14,6 @@
 # mytable = txt.maketrans(x, y)
 # print(txt.translate(mytable)) # Hi i am Dona!
 
-# test
 
 
 

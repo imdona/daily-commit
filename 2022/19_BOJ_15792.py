@@ -15,5 +15,19 @@ num1, num2 = map(int, sys.stdin.readline().split())
 print(num1 / num2)
 
 
-# case 2 :
+# case 2 : 2000점
+num1, num2 = map(int, input().split())
+# print(f"num1: {num1}, num2: {num2}") # int
 
+result = (str(num1 // num2)+".")
+# print(f"결과 : {result}") # 몫 + .
+
+num1 = (num1 % num2) * 10
+# print(f"A를 B로 나눈 나머지(num1) : {num1}")
+
+for _ in range(1000): #계속 10씩 곱해주면서 몫을 뒤에 붙여줌
+    # result += str(num1 // num2)
+    result = result + str(num1 // num2)
+    num1 = (num1 % num2) * 10
+
+print(result)

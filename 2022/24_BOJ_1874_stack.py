@@ -72,7 +72,7 @@ else:
 
 
 # -----------------------------------------------------------------------------------
-# case 2 : deque 활용
+# case 2 : deque 활용(https://devchopin.com/blog/86/)
 from collections import deque
 import sys
 

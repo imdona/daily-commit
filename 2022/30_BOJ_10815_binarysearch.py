@@ -73,14 +73,15 @@ for card in check_cards:
 
 # ---------------------------------------------------------------
 # case 3 : 다른 사람 풀이 보면서 추가 공부(set로 중복 제거)  (시간: 392ms)
+# set : 해시 테이블, 탐색이 빠르다!
 '''결과 값을 string +로 출력 -> 시간 제일 짧음!'''
 import sys
 
 def solution():
-    input()  # 사용안하니까 변수에 정의 x
-    origin_cards = set(input().split())  # 숫자 카드에 적혀있는 정수 set
-    input()  # 사용안하니까 변수에 정의 x
-    check_cards = input().split()    # 확인해야할 카드에 적혀있는 정수
+    sys.stdin.readline()  # 사용안하니까 변수에 정의 x
+    origin_cards = set(sys.stdin.readline().split())  # 숫자 카드에 적혀있는 정수 set
+    sys.stdin.readline()  # 사용안하니까 변수에 정의 x
+    check_cards = sys.stdin.readline().split()    # 확인해야할 카드에 적혀있는 정수
     res = ''
     for card in check_cards:
         if card in origin_cards:
@@ -97,10 +98,10 @@ solution()
 import sys
 
 def solution():
-    input()  # 사용안하니까 변수에 정의 x
-    origin_cards = set(input().split())  # 숫자 카드에 적혀있는 정수 set
-    input()  # 사용안하니까 변수에 정의 x
-    check_cards = input().split()  # 확인해야할 카드에 적혀있는 정수
+    sys.stdin.readline()  # 사용안하니까 변수에 정의 x
+    origin_cards = set(sys.stdin.readline().split())  # 숫자 카드에 적혀있는 정수 set
+    sys.stdin.readline()  # 사용안하니까 변수에 정의 x
+    check_cards = sys.stdin.readline().split()  # 확인해야할 카드에 적혀있는 정수
 
     result = []
 

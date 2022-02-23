@@ -37,3 +37,27 @@ def fib_table_tab(n):
     return fib_table_table[n%p]
 
 print(fib_table_tab(n))
+
+
+# ----------------------------------------------------------------
+# case 2: 다른 사람 풀이 공부하기 - 메모리 29056KB/ 시간 56ms
+# 이해가 잘 안감 다시 생각해보기
+def mul(a, b):
+    x1 = (a[0]*b[0] + a[1]*b[2]) % 1000000
+    x2 = (a[0]*b[1] + a[1]*b[3]) % 1000000
+    x3 = (a[2]*b[0] + a[3]*b[2]) % 1000000
+    x4 = (a[2]*b[1] + a[3]*b[3]) % 1000000
+    return x1,x2,x3,x4  # 원소가 4개인 튜플로 리턴
+
+def fib(n):
+    a, b = (1,0,0,1), (1,1,1,0)
+    while n > 0:
+        if n & 1:  # & : 비트 연산자(Bitwise)
+            a = mul(a, b)
+            print(f"a : {a}")
+        b = mul(b, b)
+        print(b)
+        n >>= 1  # shift 연산(왼쪽 shift)
+    return a[2]
+
+print(fib(int(input())))

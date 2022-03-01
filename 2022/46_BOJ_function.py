@@ -35,3 +35,59 @@ for k in sorted(num):
 
 # -------------------------------------------------------------
 # 1065 : 한수
+# case 1 : 한수가 아닌 수 카운트해서 전체에서 빼기 - 메모리 30864KB / 시간 68ms
+import sys
+num = int(sys.stdin.readline())
+count = 0  # 한수가 아닌 수 카운트
+
+for i in range(1, num + 1):
+    # 길이가 3자리이거나 4자리일때만 확인(1자리 또는 2자리일때는 무조건 한수임)
+    if len(str(i)) == 3 and (int(str(i)[2]) - int(str(i)[1])) != (int(str(i)[1]) - int(str(i)[0])): count += 1
+    elif len(str(i)) == 4: count += 1
+
+print(num - count)
+
+# case 1 : (함수로 만들기) 한수가 아닌 수 카운트해서 전체에서 빼기 - 메모리 30864KB / 시간 72ms
+import sys
+num = int(sys.stdin.readline())
+
+def solve(num):
+    count = 0  # 한수가 아닌 수 카운트
+
+    for i in range(1, num + 1):
+        # 길이가 3자리이거나 4자리일때만 확인(1자리 또는 2자리일때는 무조건 한수임)
+        if len(str(i)) == 3 and (int(str(i)[2]) - int(str(i)[1])) != (int(str(i)[1]) - int(str(i)[0])): count += 1
+        elif len(str(i)) == 4: count += 1
+
+    return num - count
+
+print(solve(num))
+
+
+# case 2 : 한수인 수 카운트 정리
+num = int(input())
+
+if num <= 99: sum = num  # 3자리 수 이하일 때는 입력한 수 = 한 수
+else:
+    sum = 99  # 3자리 수 이상일 때는, 두자리 수까지는 한 수로 카운트하고 시작
+    for i in range(100, num + 1):
+        if i//100 + i%10 == ((i%100) // 10) * 2: sum += 1
+
+print(sum)
+
+# case 2 : 한수인 수 카운트 이해하기
+num = int(input())
+
+if num <= 99: sum = num  # 3자리 수 이하일 때는 입력한 수 = 한 수
+else:
+    sum = 99  # 3자리 수 이상일 때는, 두자리 수까지는 한 수로 카운트하고 시작
+    for i in range(100, num + 1):
+        # 첫번째 수 + 세번째 수(2a+2b) == 두번째수(a+b) * 2
+        if i//100 + i%10 == ((i%100) // 10) * 2:
+            print(i)  # 한수인 수
+            print(f"1 : {i//100}")  # 100으로 나눈 몫 : 첫번째 자리 수(a)
+            print(f"2 : {i%10}")  # 10으로 나눈 나머지 : 세번째 자리 수(a+2b)
+            print(f"3 : {(i%100 // 10) * 2}")  # 두번째 자리 수(a+b) * 2
+            sum += 1
+
+print(sum)

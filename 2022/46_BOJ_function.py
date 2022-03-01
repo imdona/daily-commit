@@ -65,7 +65,8 @@ print(solve(num))
 
 
 # case 2 : 한수인 수 카운트 정리
-num = int(input())
+import sys
+num = int(sys.stdin.readline())
 
 if num <= 99: sum = num  # 3자리 수 이하일 때는 입력한 수 = 한 수
 else:
@@ -76,7 +77,8 @@ else:
 print(sum)
 
 # case 2 : 한수인 수 카운트 이해하기
-num = int(input())
+import sys
+num = int(sys.stdin.readline())
 
 if num <= 99: sum = num  # 3자리 수 이하일 때는 입력한 수 = 한 수
 else:

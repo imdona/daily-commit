@@ -64,7 +64,7 @@ def solve(num):
 print(solve(num))
 
 
-# case 2 : 한수인 수 카운트 정리
+# case 2 : 한수인 수 카운트 정리 - 메모리 30864KB / 시간 68ms
 import sys
 num = int(sys.stdin.readline())
 

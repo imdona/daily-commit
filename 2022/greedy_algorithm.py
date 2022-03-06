@@ -156,3 +156,68 @@ def min_fee(pages_to_print):
         total_fee += sorted_list[i] * (len(sorted_list) - i)
 
     return total_fee
+
+
+########################################################################
+'''
+네번째 문제
+최대한 많은 수업을 들을 수 있는 수업 조합을 찾아주는 함수 구현하기
+
+아래의 리스트는 코드잇 대학교의 수업 리스트이다.
+[(4, 7), (2, 5), (1, 3), (8, 10), (5, 9), (2, 6), (13, 16), (9, 11), (1, 8)]
+
+리스트에 담겨있는 튜플들은 각각 하나의 수업을 나타냅니다.
+각 튜플의 0번째 항목은 해당 수업의 시작 시간, 그리고 1 번 항목은 해당 수업이 끝나는 시간입니다.
+예를 들어서 0번 인덱스에 있는 튜플값은 (4, 7)이니까, 해당 수업은 4교시에 시작해서 7교시에 끝나는 거죠.
+
+(2, 5)를 듣는다고 가정합시다. (4, 7) 수업은 (2, 5)가 끝나기 전에 시작하기 때문에, 두 수업은 같이 들을 수 없습니다.
+반면, 수업 (1, 3)과 (4, 7)은 시간이 겹치지 않기 때문에 동시에 들을 수 있습니다.
+
+열정이 불타오르는 신입생 지웅이는 최대한 많은 수업을 들을 수 있는 수업 조합을 찾아주는 함수 course_selection 함수를 작성하려고 합니다.
+course_selection은 파라미터로 전체 수업 리스트를 받고 가능한 많은 수업을 담은 리스트를 리턴합니다.
+
+-> 결과 예시 : [(1, 3), (4, 7), (8, 10), (13, 16)]
+
+* 인풋 리스트 : 리스트에 담겨 담긴 튜플들은 각각 하나의 수업 (시작교시, 종료교시)
+    - (2, 5) -> (4, 7) : 수강 가능
+    - (2, 5) -> (5, 7), (2, 5) -> (4, 7) : 수강 불가능
+'''
+# case 1
+def course_selection(course_list):
+    # 인풋 리스트를 끝나는 교시 순으로 정렬
+    sorted_list = sorted(course_list, key = lambda x: (x[1], x[0]))
+    max_courses = []  # 최대 수업 개수 리스트
+
+    # 첫번째 수업 추가
+    max_courses.append(sorted_list[0])
+
+    # 마지막 인덱스 수업의 종료 교시 < 시작 교시
+    for i in sorted_list:
+        if max_courses[len(max_courses) - 1][1] < i[0]:
+            max_courses.append(i)
+
+
+    return sorted(max_courses)
+
+
+# case 2 : 조금 더 간단하게!
+def course_selection(course_list):
+    # 수업을 끝나는 순서로 정렬한다
+    sorted_list = sorted(course_list, key=lambda x: x[1])
+
+    # 가장 먼저 끝나는 수업은 무조건 듣는다 : 리스트 생성하면서 값 넣기!
+    my_selection = [sorted_list[0]]
+
+    # 이미 선택한 수업과 안 겹치는 수업 중 가장 빨리 끝나는 수업을 고른다
+    for course in sorted_list:
+        # 마지막 수업이 끝나기 전에 새 수업이 시작하면 겹친다
+        if course[0] > my_selection[-1][1]:
+            my_selection.append(course)
+
+    return my_selection
+
+
+# 테스트
+print(course_selection([(6, 10), (2, 3), (4, 5), (1, 7), (6, 8), (9, 10)]))
+print(course_selection([(1, 2), (3, 4), (0, 6), (5, 7), (8, 9), (5, 9)]))
+print(course_selection([(4, 7), (2, 5), (1, 3), (8, 10), (5, 9), (2, 5), (13, 16), (9, 11), (1, 8)]))

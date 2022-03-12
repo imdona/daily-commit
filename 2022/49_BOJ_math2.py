@@ -82,10 +82,60 @@ if N > 1:
 
 
 # -------------------------------------------------------------
-# 4948 : 베르트랑 공준
+# 4948 : 베르트랑 공준 - 수학 & 정수론 & 소수판정 & 에라토스테네스의 체
+'''
+베르트랑 공준 : 임의의 자연수 n에 대하여, n보다 크고 2n보다 작거나 같은 소수는 적어도 하나 존재한다.
+예) 10보다 크고 20보다 작은 소수는 4개 있다. (11, 13, 17, 19)
+n이 주어졌을 때 n보다 크고, 2n보다 작거나 같은 소수의 개수를 구하는 프로그램(1 ≤ n ≤ 123,456)
+'''
+# case 1 : 시간초과
+while True:
+    n = int(input())
+
+    # 0 입력하면 break
+    if n == 0: break
+
+    # n ~ 2n 사이의 소수의 개수 출력
+    count = 0
+
+    def check_prime(num):
+        '''소수인지 확인하고, 소수이면 True, 아니면 False 리턴'''
+        if num == 1: return False
+        else:
+            for i in range(2, int(num**0.5) + 1):
+                if num % i == 0:
+                    return False
+            return True
+
+    for i in range(n + 1, 2*n + 1):
+        # 소수이면 리스트에 추가
+        if check_prime(i) == True:
+            count += 1
+
+    # 소수개수 프린트
+    print(count)
 
 
+# case 2 : 에라토스테네스의 체 공식을 이용하여, 미리 소수 테이블 구하기 - 메모리 34720KB / 시간 728ms
+# 소수 테이블 미리 만들기
+prime_arr = [False, False] + [True] * (2*123456 - 1)  # n의 최대값인 12345*2
 
+for i in range(2, int((2*123456)**0.5 + 1)):
+    if prime_arr[i]:
+        j = 2
+        while i*j <= 2*123456:
+            prime_arr[i*j] = False
+            j += 1
 
+while True:
+    n = int(input())
+    count = 0
 
+    # 0 입력하면 break
+    if n == 0: break
 
+    # n ~ 2n 사이의 소수의 개수 출력
+    for k in range(n+1, 2*n + 1):
+        if prime_arr[k]: count += 1
+
+    print(count)

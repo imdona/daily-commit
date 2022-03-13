@@ -15,20 +15,20 @@
 # print(txt.translate(mytable)) # Hi i am Dona!
 
 
-import sys
+# import sys
 
-# stdout assigned to a variable
-var = sys.stdout
-arr = ['geeks', 'for', 'geeks']
+# # stdout assigned to a variable
+# var = sys.stdout
+# arr = ['geeks', 'for', 'geeks']
 
-# printing everything in the same line
-for i in arr:
-    var.write(i)
-# 출력 : geeksforgeeks
+# # printing everything in the same line
+# for i in arr:
+#     var.write(i)
+# # 출력 : geeksforgeeks
 
-# printing everything in a new line
-for j in arr:
-    var.write('\n'+j)
+# # printing everything in a new line
+# for j in arr:
+#     var.write('\n'+j)
 
 '''
 출력 :
@@ -38,7 +38,45 @@ geeks
 '''
 
 
+# 소수 테이블 미리 만들기
+prime_arr = [False, False] + [True]*9999  # n의 최대값인 10000
 
+for i in range(2, int(9999**0.5 + 1)):
+    if prime_arr[i]:  # 소수일때만 확인
+        j = 2  # i에 곱하는 초기값 정의
+        # 범위 줄이기 : 전체가 아니라, i*j가 전체 범위보다 작을 때까지만 반복
+        while i*j <= 9999:
+            prime_arr[i*j] = False  # i에 j를 곱한 값은 소수x
+            j += 1
+
+T = int(input())  # test case
+for _ in range(T):
+    n = int(input())  # 짝수 입력 : 4 ≤ n ≤ 10,000
+    partition = []
+
+    # 2부터 n/2까지 확인
+    for i in range(2, n//2 + 1):
+        # 짝수 - 소수 = 소수 일때 partition 리스트에 넣기
+        if prime_arr[i] == True and prime_arr[n-i] == True:
+            partition.append([i, n-i])
+        else:
+            continue
+    # print(partition)  # [[3, 7], [5, 5]]
+
+    # 파티션이 2개 이상일 때 비교
+    if len(partition) >= 2:
+        abs_value = abs(partition[0][0] - partition[0][1])  # 초기값 정의
+        result = 0  # 결과
+
+        # abs가 더 작으면 값 바꿔준다
+        for j in partition:
+            if abs_value > abs(j[0] - j[1]):
+                abs_value = abs(j[0] - j[1])
+                result = j
+
+        print(*result)  # unpacking하여 print
+
+    else: print(partition[0][0], partition[0][1])
 
 
 

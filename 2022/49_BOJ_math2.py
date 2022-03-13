@@ -121,10 +121,11 @@ while True:
 prime_arr = [False, False] + [True] * (2*123456 - 1)  # n의 최대값인 12345*2
 
 for i in range(2, int((2*123456)**0.5 + 1)):
-    if prime_arr[i]:
-        j = 2
+    if prime_arr[i]:  # 소수일때만 확인
+        j = 2  # i에 곱하는 초기값 정의
+        # 범위 줄이기 : 전체가 아니라, i*j가 전체 범위보다 작을 때까지만 반복
         while i*j <= 2*123456:
-            prime_arr[i*j] = False
+            prime_arr[i*j] = False  # i에 j를 곱한 값은 소수x
             j += 1
 
 while True:
@@ -139,3 +140,87 @@ while True:
         if prime_arr[k]: count += 1
 
     print(count)
+
+
+# -------------------------------------------------------------
+# 9020 : 골드바흐의 추측 - 수학 & 정수론 & 소수판정 & 에라토스테네스의 체
+'''
+골드바흐의 추측은 유명한 정수론의 미해결 문제로, 2보다 큰 모든 짝수는 두 소수의 합으로 나타낼 수 있다는 것이다. 이러한 수를 골드바흐 수라고 한다.
+또, 짝수를 두 소수의 합으로 나타내는 표현을 그 수의 골드바흐 파티션이라고 한다. 예를 들면, 4 = 2 + 2, 6 = 3 + 3, 8 = 3 + 5, 10 = 5 + 5, 12 = 5 + 7, 14 = 3 + 11, 14 = 7 + 7이다.
+10000보다 작거나 같은 모든 짝수 n에 대한 골드바흐 파티션은 존재한다.
+'''
+# case 1 - 메모리 30860KB / 시간 2136ms -> 시간이 너무 오래걸림
+# 소수 테이블 미리 만들기
+prime_arr = [False, False] + [True]*9999  # n의 최대값인 10000
+
+for i in range(2, int(9999**0.5 + 1)):
+    if prime_arr[i]:  # 소수일때만 확인
+        j = 2  # i에 곱하는 초기값 정의
+        # 범위 줄이기 : 전체가 아니라, i*j가 전체 범위보다 작을 때까지만 반복
+        while i*j <= 9999:
+            prime_arr[i*j] = False  # i에 j를 곱한 값은 소수x
+            j += 1
+
+T = int(input())  # test case
+for _ in range(T):
+    n = int(input())  # 짝수 입력 : 4 ≤ n ≤ 10,000
+    partition = []
+
+    # 2부터 n/2까지 확인
+    for i in range(2, n//2 + 1):
+        # 짝수 - 소수 = 소수 일때 partition 리스트에 넣기
+        if prime_arr[i] == True and prime_arr[n-i] == True:
+            partition.append([i, n-i])
+        else:
+            continue
+    # print(partition)  # [[3, 7], [5, 5]]
+
+    # 파티션이 2개 이상일 때 비교
+    if len(partition) >= 2:
+        abs_value = abs(partition[0][0] - partition[0][1])  # 초기값 정의
+        result = 0  # 결과
+
+        # abs가 더 작으면 값 바꿔준다
+        for j in partition:
+            if abs_value > abs(j[0] - j[1]):
+                abs_value = abs(j[0] - j[1])
+                result = j
+
+        print(*result)  # unpacking하여 print
+
+    else: print(partition[0][0], partition[0][1])
+
+
+# case 2 - 메모리 82776KB / 시간 76ms
+T = int(input())  # test case
+answer = ""
+
+# 소수테이블 만들기
+result = [False, False, True] + [True, False] * 5000  # 소수테이블 만들 때 처음부터 짝수는 False로 만들고 시작
+# 3부터 확인, 짝수는 건너뛰고 보폭 2씩 확인
+for number in range(3, 101, 2):
+    # 소수가 아니면
+    if result[number]:
+        # 수*2를 해당 수의 보폭만큼 False로 바꿔준다
+        result[number*2::number] = [False] * len(result[number*2::number])
+
+for _ in range(T):
+    N = int(input())  # 짝수 입력
+
+    # 4일 때 결과는 2+2
+    if N == 4:
+        answer += "2 2\n"
+        continue
+
+    # 2로 나누어준다(범위 줄임)
+    harf_N = N//2
+    # 나머지가 0이면(not 0 == not False == True) -> + 1
+    if not harf_N % 2:
+        harf_N += 1
+
+    for i in range(harf_N, N, 2):
+        if result[i] and result[N-i]:
+            answer += f"{N - i} {i}" + "\n"
+            break
+
+print(answer, end="")

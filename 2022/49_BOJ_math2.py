@@ -224,3 +224,39 @@ for _ in range(T):
             break
 
 print(answer, end="")
+
+
+# -------------------------------------------------------------
+# 3009 : 네 번째 점 - 구현 & 기하학
+'''세 점 중에 겹치지않는 점이 네번째 점의 좌표이다'''
+# case 1 - 메모리 30864KB / 시간 68ms
+dots_x = []
+dots_y = []
+
+for _ in range(3):
+    x, y = input().split()
+    dots_x.append(x)
+    dots_y.append(y)
+
+# 결과가 1개 인것을 새서 저장한다.
+for i in range(3):
+    if dots_x.count(dots_x[i]) == 1: result_x = dots_x[i]
+    if dots_y.count(dots_y[i]) == 1: result_y = dots_y[i]
+
+print(result_x, result_y)
+
+
+# case 2 - 메모리 9284KB / 시간 52ms -> 변수를 만들지 않고, 바로 print하니까 메모리가 확실히 절약된다
+x = []
+y = []
+
+for i in range(3):
+    a, b = map(int, input().split())
+    x.append(a)
+    y.append(b)
+
+x.sort()
+y.sort()
+
+# 다르면 해당 좌표를 결과좌표로, 같으면 나머지 좌표를 결과좌표로
+print(x[0] if x[0] != x[1] else x[2], y[0] if y[0] != y[1] else y[2])

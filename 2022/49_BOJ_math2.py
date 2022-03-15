@@ -260,3 +260,36 @@ y.sort()
 
 # 다르면 해당 좌표를 결과좌표로, 같으면 나머지 좌표를 결과좌표로
 print(x[0] if x[0] != x[1] else x[2], y[0] if y[0] != y[1] else y[2])
+
+
+# -------------------------------------------------------------
+# 3053 : 택시 기하학 - 수학 & 기하학
+'''
+반지름 R이 주어졌을 때, 유클리드 기하학에서 원의 넓이와, 택시 기하학에서 원의 넓이를 구하는 프로그램을 작성하시오.
+유클리드 기하학의 원 넓이 :  PI * r^2
+택시 기하학의 원 넓이 : 2 * r^2
+'''
+# case 1 : f-string - 메모리 32976KB / 시간 68ms
+import math
+PI = math.pi
+R = int(input())
+
+print(f"{PI*R*R:.6f}")
+print(f"{2*R*R:.6f}")
+
+
+# case 2 : %f - 메모리 32976KB / 시간 68ms
+import math
+PI = math.pi
+R = int(input())
+
+print("%.6f" % (PI*R*R))
+print("%.6f" % (2*R*R))
+
+# case 3 : format - 메모리 32976KB / 시간 72ms
+import math
+PI = math.pi
+R = int(input())
+
+print("{:.6f}".format(PI*R*R))
+print("{:.6f}".format(2*R*R))

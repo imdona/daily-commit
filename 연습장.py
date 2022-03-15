@@ -85,22 +85,28 @@ geeks
 # dots = [input().split() for _ in range(3)]
 # # print(dots)  # [['5', '5'], ['5', '7'], ['7', '5']]
 
-dots_x = []
-dots_y = []
+# dots_x = []
+# dots_y = []
 
-for _ in range(3):
-    x, y = input().split()
-    dots_x.append(x)
-    dots_y.append(y)
+# for _ in range(3):
+#     x, y = input().split()
+#     dots_x.append(x)
+#     dots_y.append(y)
 
-# 결과가 1개 인것을 새서 저장한다.
-for i in range(3):
-    if dots_x.count(dots_x[i]) == 1: result_x = dots_x[i]
-    if dots_y.count(dots_y[i]) == 1: result_y = dots_y[i]
+# # 결과가 1개 인것을 새서 저장한다.
+# for i in range(3):
+#     if dots_x.count(dots_x[i]) == 1: result_x = dots_x[i]
+#     if dots_y.count(dots_y[i]) == 1: result_y = dots_y[i]
 
-print(result_x, result_y)
+# print(result_x, result_y)
 
+# case 1
+import math
+PI = math.pi
+R = int(input())
 
+print("{:.6f}".format(PI*R*R))
+print("{:.6f}".format(2*R*R))
 
 
 

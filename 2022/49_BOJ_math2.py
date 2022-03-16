@@ -293,3 +293,44 @@ R = int(input())
 
 print("{:.6f}".format(PI*R*R))
 print("{:.6f}".format(2*R*R))
+
+
+# -------------------------------------------------------------
+# 1002 : 터렛 - 수학 & 기하학
+'''
+- 두 원이 일치하는 경우 : d == 0 and r1 == r2 => -1
+- 두 원이 한점에서 만나는 경우(외접, 내접) : d == r1 + r2 or r2 == r1 + d => 1
+- 두 원이 만나지 않는 경우 : r, r1, r2 중 가장 긴 값이 나머지 두 값의 합보다 큼 => 0
+- 두 원이 두 점에서 만나는 경우 : else  => 2
+'''
+# case 1 : 메모리 30860KB / 시간 80ms
+T = int(input())  # test case
+
+for _ in range(T):
+    x1, y1, r1, x2, y2, r2 = map(int, input().split())
+    d = ((x2 - x1)**2 + (y2 - y1)**2)**0.5  # 두 원 사이의 거리
+    radius_list = [r1, r2, d]
+    m = max(radius_list)  # 최대값
+    radius_list.remove(m)  # 최대값 제거
+
+    if d == 0 and r1 == r2: print(-1)
+    elif d == r1 + r2 or m == sum(radius_list): print(1)
+    elif m > sum(radius_list): print(0)
+    else: print(2)
+
+# case 1 : short coding
+# 참고 블로그 : https://leedakyeong.tistory.com/entry/%EB%B0%B1%EC%A4%80-1002%EB%B2%88-%ED%84%B0%EB%A0%9B-in-python-%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%BD%94%EB%93%9C-%EB%B0%8F-%EC%84%A4%EB%AA%85
+print(-1 if (d==0 and r1==r2) else 1 if (r == r1+r2 or m == sum(radius_list)) else 0 if (m > sum(radius_list)) else 2)
+
+
+# case 2 : 메모리 29056KB / 시간 52ms
+T = int(input())
+for _ in range(T):
+    x1, y1, r1, x2, y2, r2 = map(int, input().split())
+    d = (((x1 - x2)**2) + ((y1 - y2)**2))**0.5
+    if d > r1+r2: print(0)  # 두 원이 만나지 않음
+    elif d == r1+r2: print(1)  # 외접 -> 한 점에서 만남
+    elif abs(r1-r2) < d < r1+r2: print(2)  # 두 점에서 만날 때
+    elif abs(r2-r1) == d and r2 == r1: print(-1)  # 두 원이 일치
+    elif abs(r2-r1) == d: print(1)  # 내접 -> 한 점에서 만남
+    else: print(0)  # 나머지 모두 -> 두 원이 만나지 않음

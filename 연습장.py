@@ -114,19 +114,30 @@ geeks
 - 두 원이 만나지 않는 경우 : r, r1, r2 중 가장 긴 값이 나머지 두 값의 합보다 큼 => 0
 - 두 원이 두 점에서 만나는 경우 : else  => 2
 '''
-T = int(input())  # test case
+# T = int(input())  # test case
 
-for _ in range(T):
-    x1, y1, r1, x2, y2, r2 = map(int, input().split())
-    d = ((x2 - x1)**2 + (y2 - y1)**2)**0.5  # 두 원 사이의 거리
-    radius_list = [r1, r2, d]
-    m = max(radius_list)  # 최대값
-    radius_list.remove(m)  # 최대값 제거
+# for _ in range(T):
+#     x1, y1, r1, x2, y2, r2 = map(int, input().split())
+#     d = ((x2 - x1)**2 + (y2 - y1)**2)**0.5  # 두 원 사이의 거리
+#     radius_list = [r1, r2, d]
+#     m = max(radius_list)  # 최대값
+#     radius_list.remove(m)  # 최대값 제거
 
-    if d == 0 and r1 == r2: print(-1)
-    elif d == r1 + r2 or m == sum(radius_list): print(1)
-    elif m > sum(radius_list): print(0)
-    else: print(2)
+#     if d == 0 and r1 == r2: print(-1)
+#     elif d == r1 + r2 or m == sum(radius_list): print(1)
+#     elif m > sum(radius_list): print(0)
+#     else: print(2)
+
+
+N = int(input())  # 개수
+word_list = [input() for _ in range(N)]
+
+# 길이가 짧은 것부터 -> 길이가 같으면 사전 순으로 정렬
+word_list.sort(key = lambda x: len(x))
+
+# 중복 제거하고 프린트
+for i in set(word_list):
+    print(i)
 
 
 

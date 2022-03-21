@@ -72,4 +72,37 @@ print("\n".join(word))
 
 
 # -------------------------------------------------------------
-#
+# 10814 [나이순 정렬] - 정렬
+# case 1 - 메모리 45876KB / 시간 272ms
+# 입력받기
+import sys
+N = int(sys.stdin.readline())
+member_list = []
+for _ in range(N):
+    age, name = sys.stdin.readline().split()
+    age = int(age)
+    member_list.append([age, name])
+
+# 정렬
+member_list.sort(key = lambda x : x[0])
+
+# 출력
+for member in member_list:
+    print(*member)
+
+
+# case 2 - 메모리 61632KB / 시간 292ms
+# join & 코드 줄이기
+import sys
+
+N = int(sys.stdin.readline())
+member_list = [sys.stdin.readline().split() for _ in range(N)]
+
+member_list = sorted(member_list, key=lambda x: int(x[0]))
+for member in member_list:
+    print(' '.join(member))
+
+
+# -------------------------------------------------------------
+# 좌표 압축
+# https://www.acmicpc.net/problem/18870

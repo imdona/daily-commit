@@ -30,12 +30,12 @@
 # for j in arr:
 #     var.write('\n'+j)
 
-'''
-출력 :
-geeks
-for
-geeks
-'''
+# '''
+# 출력 :
+# geeks
+# for
+# geeks
+# '''
 
 
 # # 소수 테이블 미리 만들기
@@ -108,12 +108,12 @@ geeks
 # print("{:.6f}".format(PI*R*R))
 # print("{:.6f}".format(2*R*R))
 
-'''
-- 두 원이 일치하는 경우 : d == 0 and r1 == r2 => -1
-- 두 원이 한점에서 만나는 경우(외접, 내접) : d == r1 + r2 or r2 == r1 + d => 1
-- 두 원이 만나지 않는 경우 : r, r1, r2 중 가장 긴 값이 나머지 두 값의 합보다 큼 => 0
-- 두 원이 두 점에서 만나는 경우 : else  => 2
-'''
+# '''
+# - 두 원이 일치하는 경우 : d == 0 and r1 == r2 => -1
+# - 두 원이 한점에서 만나는 경우(외접, 내접) : d == r1 + r2 or r2 == r1 + d => 1
+# - 두 원이 만나지 않는 경우 : r, r1, r2 중 가장 긴 값이 나머지 두 값의 합보다 큼 => 0
+# - 두 원이 두 점에서 만나는 경우 : else  => 2
+# '''
 # T = int(input())  # test case
 
 # for _ in range(T):
@@ -129,15 +129,10 @@ geeks
 #     else: print(2)
 
 
-N = int(input())  # 개수
-word_list = [input() for _ in range(N)]
-
-# 길이가 짧은 것부터 -> 길이가 같으면 사전 순으로 정렬
-word_list.sort(key = lambda x: len(x))
-
-# 중복 제거하고 프린트
-for i in set(word_list):
-    print(i)
+import sys
+member_list = sys.stdin.read().splitlines()[1:]
+member_list.sort(key = lambda x: int(x.split()[0]))
+sys.stdout.write('\n'.join(member_list))
 
 
 

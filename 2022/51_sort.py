@@ -104,5 +104,30 @@ for member in member_list:
 
 
 # -------------------------------------------------------------
-# 좌표 압축
-# https://www.acmicpc.net/problem/18870
+# 18870 [좌표 압축] - 정렬 & 값 / 좌표 압축
+'''cf) list.index() 메소드를 사용하면, 시간복잡도가 O(N)임
+dict[key] 형태로 출력하면 시간복잡도가 O(1)이라 훨씬 빠름'''
+# case 1 - 메모리 148208KB / 시간 2116ms
+N = int(input())  # 개수
+cord = list(map(int, input().split()))  # 좌표 입력받기
+
+# 중복 제거 후 정렬
+new_cord = sorted(list(set(cord)))
+
+# 정렬 값 key - index 번호 값인 dict 만들기
+result = {}
+for i in range(len(new_cord)):
+    result[new_cord[i]] = i
+
+for i in cord:
+    print(result[i], end = ' ')
+
+
+# case 2 - 메모리 200468KB / 시간 1504ms
+N = input()
+nums = list(map(int, input().split(" ")))
+
+arr = sorted(set((nums)))
+num_dict = {n: i for i, n in enumerate(arr)}  # dict comprehension
+
+print(" ".join([str(num_dict[num]) for num in nums]))

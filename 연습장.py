@@ -129,10 +129,36 @@
 #     else: print(2)
 
 
-import sys
-member_list = sys.stdin.read().splitlines()[1:]
-member_list.sort(key = lambda x: int(x.split()[0]))
-sys.stdout.write('\n'.join(member_list))
+# import sys
+# member_list = sys.stdin.read().splitlines()[1:]
+# member_list.sort(key = lambda x: int(x.split()[0]))
+# sys.stdout.write('\n'.join(member_list))
 
+# def getBinaryNum(num, result = []):
+#     a = num // 2
+#     b = num % 2
+#     result.append(b)
+#     if a == 0: return result[::-1]
+#     else: return getBinaryNum(a, result)
 
+# n = int(input())
+# print(f'{n:2b}')
+# # print(*getBinaryNum(n))
+# result = getBinaryNum(n)
+# for i in result:
+#     print(i, end='')
 
+def getBinaryNum(num, result = []):
+    a = num // 2
+    b = num % 2
+    result.append(b)
+    if a == 0: return result[::-1]
+    else: return getBinaryNum(a, result)
+
+T = int(input())
+for _ in range(T):
+    bnum = getBinaryNum(int(input()))[::-1]
+    # print(bnum)
+    for i in range(len(bnum)):
+        if bnum[i] == 1:
+            print(i, end = ' ')

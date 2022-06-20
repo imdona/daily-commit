@@ -1,5 +1,5 @@
 # 3460 이진수 : https://www.acmicpc.net/problem/3460
-# case 0 : 메모리 30840KB / 시간 64ms
+# case 1 : 메모리 30840KB / 시간 64ms
 T = int(input())
 
 # 내장함수인 bin()을 활용하여 이진수로 바꾸는 방법 활용
@@ -13,7 +13,7 @@ for _ in range(T):
 
 
 # -------------------------------------------------------------
-# case 1 : 메모리 30840KB / 시간 68ms
+# case 2 : 메모리 30840KB / 시간 68ms
 T = int(input())
 
 # 내장함수인 bin()을 활용하여 이진수로 바꾸는 방법 활용
@@ -30,7 +30,7 @@ T = int(input())
 for _ in range(T):
     # f-string 활용하여 2진수로 바꿔주고 순서 거꾸로
     bnum = f'{int(input()):2b}'[::-1]
-    bnum = format(int(input()), 'b')  # 같은 표현
+    # bnum = format(int(input()), 'b')  # 같은 표현
     # print(bnum)
     G = (b for b in range(len(bnum)) if bnum[b] == '1')  # list comprehension
     print(*G)  #unpacking

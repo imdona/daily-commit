@@ -18,4 +18,24 @@ for i in star(N):
     print(i)
 
 # -------------------------------------------------------------
-# case 2 : 메모리 KB / 시간 ms
+# case 2 : 메모리 40188KB / 시간 76ms
+N = int(input())
+
+def star(n) :
+    if n ==3 :
+        return ['***','* *', '***']
+    temp = star(n//3)
+    stars = []
+
+    for i in temp:
+        stars.append(i*3)
+
+    for i in temp:
+        stars.append(i+' '*(n//3)+i)
+
+    for i in temp:
+        stars.append(i*3)
+
+    return stars
+
+print('\n'.join(star(N)))
